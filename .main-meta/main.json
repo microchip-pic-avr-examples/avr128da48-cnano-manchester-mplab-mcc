@@ -39,12 +39,12 @@
         "author": "Microchip",
         "subcategories": [
 			[
-				"peripherals", "MCC", "Security"
+				"peripherals", "CCL"
 			]
 		],
-        "peripherals": [ "CCL", "USART", "TCB", "SPI"
+        "peripherals": [ "CCL"
         ],
-        "keywords": [ "Manchester", "Encoder", "Decoder", "CIPs", "Serial Communications", "Core Independent", "Event System"
+        "keywords": [ "Serial Communications", "Core Independent", "Event System"
         ],
 		"additionalData": {
 			"longDescription": {
