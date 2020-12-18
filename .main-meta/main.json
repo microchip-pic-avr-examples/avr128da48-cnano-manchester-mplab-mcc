@@ -5,26 +5,26 @@
         "metaDataVersion": "1.1.0",
         "name": "com.microchip.mcu8.mplabx.project.avr128da48-cnano-manchester-mplab-mcc",
         "version": "1.0.0",
-        "displayName": "  ",
+        "displayName": "Manchester Encoder and Decoder Using CIPs",
         "projectName": "avr128da48-cnano-manchester-mplab-mcc",
-        "shortDescription": "",
+        "shortDescription": "This repository contains Manchester Encoder and Decoder using CIPs: TCB, USART, Event System, CCL, and SPI peripherals",
         "ide": {
             "name": "MPLAB X",
-            "semverRange": ""
+            "semverRange": ">=5.40.0"
         },
         "compiler": [
 			{
 				"name": "XC8",
-				"semverRange": ""
+				"semverRange": "^2.30.0"
 			}
 		],
         "dfp": {
-            "name": "",
-            "semverRange": ""
+            "name": "AVR-Dx",
+            "semverRange": "1.6.88"
         },
         "configurator": {
-            "name": "",
-            "semverRange": ""
+            "name": "MCC",
+            "semverRange": "4.0.1"
         },
         "device": {
             "metaDataVersion": "1.0.0",
@@ -32,16 +32,19 @@
             "content": {
                 "metaDataVersion": "1.0.0",
                 "category": "com.microchip.device",
-                "name": "",
+                "name": "AVR128DA48",
                 "versionRange": "*"
             }
         },
-        "author": "",
+        "author": "Microchip",
         "subcategories": [
+			[
+				"peripherals", "MCC", "Security"
+			]
+		],
+        "peripherals": [ "CCL", "USART", "TCB", "SPI"
         ],
-        "peripherals": [
-        ],
-        "keywords": [
+        "keywords": [ "Manchester", "Encoder", "Decoder", "CIPs", "Serial Communications", "Core Independent", "Event System"
         ],
 		"additionalData": {
 			"longDescription": {
