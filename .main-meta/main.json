@@ -1,0 +1,58 @@
+{
+    "metaDataVersion": "1.0.0",
+    "category": "com.microchip.ide.project",
+    "content": {
+        "metaDataVersion": "1.1.0",
+        "name": "com.microchip.mcu8.mplabx.project.avr128da48-cnano-manchester-mplab-mcc",
+        "version": "1.0.0",
+        "displayName": "  ",
+        "projectName": "avr128da48-cnano-manchester-mplab-mcc",
+        "shortDescription": "",
+        "ide": {
+            "name": "MPLAB X",
+            "semverRange": ""
+        },
+        "compiler": [
+			{
+				"name": "XC8",
+				"semverRange": ""
+			}
+		],
+        "dfp": {
+            "name": "",
+            "semverRange": ""
+        },
+        "configurator": {
+            "name": "",
+            "semverRange": ""
+        },
+        "device": {
+            "metaDataVersion": "1.0.0",
+            "category": "com.microchip.portal.contentRef",
+            "content": {
+                "metaDataVersion": "1.0.0",
+                "category": "com.microchip.device",
+                "name": "",
+                "versionRange": "*"
+            }
+        },
+        "author": "",
+        "subcategories": [
+        ],
+        "peripherals": [
+        ],
+        "keywords": [
+        ],
+		"additionalData": {
+			"longDescription": {
+				"metaDataVersion": "1.0.0",
+				"category": "com.microchip.portal.fileRef",
+				"content": {
+					"metaDataVersion": "1.0.0",
+					"fileName": "./README.md",
+					"mimeType": "text/markdown"
+				}
+			}
+		}
+	}
+}
