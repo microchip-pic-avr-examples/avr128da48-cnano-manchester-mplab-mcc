@@ -4,7 +4,7 @@
     "content": {
         "metaDataVersion": "1.1.0",
         "name": "com.microchip.mcu8.mplabx.project.avr128da48-cnano-manchester-mplab-mcc",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "displayName": "Manchester Encoder and Decoder Using CIPs",
         "projectName": "avr128da48-cnano-manchester-mplab-mcc",
         "shortDescription": "This repository contains Manchester Encoder and Decoder using CIPs: TCB, USART, Event System, CCL, and SPI peripherals",
