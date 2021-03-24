@@ -1,7 +1,6 @@
-<!-- Please do not change this logo with link -->
 [![MCHP](images/microchip.png)](https://www.microchip.com)
 
-# AVR128DA48 Manchester Encoder and Decoder Using Core Independent Peripherals (CIPs)
+# Manchester Encoder and Decoder Using Core Independent Peripherals (CIPs)
 
   <br>The repository contains two MPLAB® X projects:
 
