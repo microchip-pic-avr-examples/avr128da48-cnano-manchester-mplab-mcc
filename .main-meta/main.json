@@ -2,60 +2,54 @@
     "metaDataVersion": "1.0.0",
     "category": "com.microchip.ide.project",
     "content": {
-        "metaDataVersion": "1.1.0",
+        "metaDataVersion": "1.3.0",
         "name": "com.microchip.mcu8.mplabx.project.avr128da48-cnano-manchester-mplab-mcc",
-        "version": "1.0.2",
-        "displayName": "Manchester Encoder and Decoder Using Core Independent Peripherals (CIPs)",
+        "version": "2.0.0",
+        "displayName": "Manchester Encoder and Decoder - Use Case for CIPs Using the AVR128DA48 Microcontroller with MCC Melody",
         "projectName": "avr128da48-cnano-manchester-mplab-mcc",
         "shortDescription": "This repository contains Manchester Encoder and Decoder using CIPs: TCB, USART, Event System, CCL, and SPI peripherals",
         "ide": {
             "name": "MPLAB X",
-            "semverRange": ">=5.45.0"
+            "semverRange": ">=6.20.0"
         },
         "compiler": [
 			{
 				"name": "XC8",
-				"semverRange": "^2.31.0"
+				"semverRange": "^2.46.0"
 			}
 		],
         "dfp": {
             "name": "AVR-Dx",
-            "semverRange": "^1.6.88"
+            "semverRange": "^2.4.286"
         },
         "configurator": {
             "name": "MCC",
             "semverRange": ">=4.0.1"
         },
         "device": {
-            "metaDataVersion": "1.0.0",
+            "metaDataVersion": "2.0.0",
             "category": "com.microchip.portal.contentRef",
             "content": {
-                "metaDataVersion": "1.0.0",
+                "metaDataVersion": "2.0.0",
                 "category": "com.microchip.device",
                 "name": "AVR128DA48",
                 "versionRange": "*"
             }
         },
         "author": "Microchip",
-        "subcategories": [
-			[
-				"Peripherals",
-				"CCL"
-			]
-		],
         "peripherals": [
 		"CCL"
         ],
         "keywords": [
 		"Serial Communication",
-		"Core Independent Peripherals"
+		"Core Independent Peripheral"
         ],
 		"additionalData": {
 			"longDescription": {
-				"metaDataVersion": "1.0.0",
+				"metaDataVersion": "2.0.0",
 				"category": "com.microchip.portal.fileRef",
 				"content": {
-					"metaDataVersion": "1.0.0",
+					"metaDataVersion": "2.0.0",
 					"fileName": "./README.md",
 					"mimeType": "text/markdown"
 				}
