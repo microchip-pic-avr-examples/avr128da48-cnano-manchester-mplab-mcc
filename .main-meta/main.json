@@ -24,13 +24,13 @@
         },
         "configurator": {
             "name": "MCC",
-            "semverRange": ">=4.0.1"
+            "semverRange": ">=5.7.0"
         },
         "device": {
-            "metaDataVersion": "2.0.0",
+            "metaDataVersion": "1.0.0",
             "category": "com.microchip.portal.contentRef",
             "content": {
-                "metaDataVersion": "2.0.0",
+                "metaDataVersion": "1.0.0",
                 "category": "com.microchip.device",
                 "name": "AVR128DA48",
                 "versionRange": "*"
@@ -46,10 +46,10 @@
         ],
 		"additionalData": {
 			"longDescription": {
-				"metaDataVersion": "2.0.0",
+				"metaDataVersion": "1.0.0",
 				"category": "com.microchip.portal.fileRef",
 				"content": {
-					"metaDataVersion": "2.0.0",
+					"metaDataVersion": "1.0.0",
 					"fileName": "./README.md",
 					"mimeType": "text/markdown"
 				}
