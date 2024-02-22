@@ -7,7 +7,9 @@
  * 
  * @brief This file contains the API implementation for the System driver.
  *
- * @version Driver Version 1.0.1
+ * @version Driver Version 1.0.2
+ *
+ * @version Package Version 4.2.13
 */
 /*
 © [2024] Microchip Technology Inc. and its subsidiaries.
@@ -31,7 +33,6 @@
 */
 
 #include "../system.h"
-
 
 void SYSTEM_Initialize(void)
 {

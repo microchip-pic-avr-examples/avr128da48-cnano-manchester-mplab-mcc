@@ -3,11 +3,13 @@
  * 
  * @file config_bits.h
  * 
- * @defgroup config_bitsdriver Configuration Bits Driver 
+ * @defgroup config_bitsdriver CONFIGBITS Driver 
  * 
- * @brief This file contains the generated header file for the Configuration bits driver.
+ * @brief This file contains the API Prototypes for the Configuration Bits driver.
  *
  * @version Driver Version 1.0.5
+ *
+ * @version Package Version 4.2.13
 */
     
 /*

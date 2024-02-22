@@ -5,9 +5,11 @@
  * 
  * @defgroup systemdriver System Driver
  * 
- * @brief This file contains the API prototypes for the System driver.
+ * @brief This file contains the API prototype for the System Driver.
  *
- * @version Driver Version 1.0.1
+ * @version Driver Version 1.0.2
+ *
+ * @version Package Version 4.2.13
 */
 /*
 © [2024] Microchip Technology Inc. and its subsidiaries.
@@ -52,7 +54,7 @@ extern "C" {
 #include "../system/interrupt.h"
 /**
  * @ingroup systemdriver
- * @brief Initializes the system module. This routine must be called only once during the system initialization and before any other routine is called.
+ * @brief Initializes the System module. This routine is called only once during system initialization, before calling any other API.
  * @param None.
  * @return None.
 */

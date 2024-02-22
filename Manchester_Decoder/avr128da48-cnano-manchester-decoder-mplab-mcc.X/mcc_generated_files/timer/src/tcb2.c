@@ -75,8 +75,8 @@ ISR(TCB2_INT_vect)
 
 void TCB2_Initialize(void)
 {
-    // CCMP 4499; 
-    TCB2.CCMP = 0x1193;
+    // CCMP 8998; 
+    TCB2.CCMP = 0x2326;
 
     // CNT undefined; 
     TCB2.CNT = 0x0;
@@ -99,8 +99,8 @@ void TCB2_Initialize(void)
     //Temporary Value
     TCB2.TEMP = 0x0;
 
-    //CASCADE disabled; CLKSEL DIV2; ENABLE enabled; RUNSTDBY disabled; SYNCUPD disabled; 
-    TCB2.CTRLA = 0x3;
+    //CASCADE disabled; CLKSEL DIV1; ENABLE enabled; RUNSTDBY disabled; SYNCUPD disabled; 
+    TCB2.CTRLA = 0x1;
 
 }
 
