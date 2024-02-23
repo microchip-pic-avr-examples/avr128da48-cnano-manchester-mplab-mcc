@@ -5,14 +5,14 @@
 The Manchester code is a line code in which the encoding of each data bit is either a transition from LOW to HIGH or a transition from HIGH to LOW. It is a self-clocking signal with no DC component.
 
 This project focuses on the Manchester coding as per IEEE 802.3. 
-The Manchester code combines data and clock into a single signal, where one clock cycle is a Manchester-bit period with a transition occurring in the middle of it. Logic `'0'` is represented by a falling edge (HIGH to LOW transition) in the middle of the bit period, and logic `'1'` is represented by a rising edge (LOW to HIGH transition) in the middle of the bit period. 
+The Manchester code combines data and clock into a single signal, where one clock cycle is a Manchester-bit period with a transition occurring in the middle of it. Logic '`0`' is represented by a falling edge (HIGH to LOW transition) in the middle of the bit period, and logic '`1`' is represented by a rising edge (LOW to HIGH transition) in the middle of the bit period. 
 
 In this application, the Manchester communication parameters are: 
 - Baud rate: 16000 bits/s
 - 8-bit transfer
 - MSb (Most Significant bit) is sent first
 - IEEE 802.3
-- Manchester version (negative edge is binary zero).
+- Manchester version (negative edge is binary zero)
 
 An example is presented in the figure below:
 
@@ -270,7 +270,7 @@ This chapter demonstrates how to use the MPLAB X IDE to program an AVR® device 
 2.  Open the ```Example_Project.X``` project in MPLAB X IDE.
 
 3.  Set the ```Example_Project.X``` project as main project.
-    <br>Right click the project in the Projects tab and click Set as Main Project.
+    <br>Right click the project in the **Projects** tab and click Set as Main Project.
     <br><img src="images/Program_Set_as_Main_Project.png" width="600">
 
 4.  Clean and build the ```Example_Project.X``` project.
