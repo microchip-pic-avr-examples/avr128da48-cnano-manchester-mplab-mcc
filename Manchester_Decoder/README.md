@@ -21,17 +21,17 @@ An example is presented in the figure below:
 ## Related Documentation
 
 More details and code examples on the AVR128DA48 can be found at the following links:
-- [AVR128DA48 Product Page](https://www.microchip.com/wwwproducts/en/AVR128DA48)
+- [AVR128DA48 Product Page](https://www.microchip.com/wwwproducts/en/AVR128DA48?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
 - [AVR128DA48 Code Examples on Discover](https://mplab-discover.microchip.com/v2?dsl=avr128da48)
 - [AVR128DA48 Code Examples on GitHub](https://github.com/microchip-pic-avr-examples?q=avr128da48)
 
 ## Software Used
-- [MPLAB X IDE v6.20 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide)
-- [MPLAB XC8 v2.46 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers/xc8)
-- [AVR®-Dx_DFP v2.4.286 or newer](https://packs.download.microchip.com/)
+- [MPLAB X IDE v6.20 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
+- [MPLAB XC8 v3.00 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
+- [AVR®-Dx_DFP v2.6.303 or newer](https://packs.download.microchip.com/)
 
 ## Hardware Used
-- The [AVR128DA48 Curiosity Nano Development board (DM164151)](https://www.microchip.com/Developmenttools/ProductDetails/DM164151) is used as a test platform:
+- The [AVR128DA48 Curiosity Nano Development board (DM164151)](https://www.microchip.com/en-us/development-tool/dm164151?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08) is used as a test platform:
 <br><img src="images/avr128da48_cnano.png" width="600">
 - 4x Jumper wires
 
@@ -164,41 +164,42 @@ The following peripheral and clock configurations are set up using the MPLAB Cod
    <br><img src="images/decoder-mcc-lut4.png" width="400">
     
 6. TCB0:
-  - Enable Timer: Enabled
+  - Timer Enable: Enabled
   - Clock Selection: DIV1
-  - Timer Mode: Single
-  - Requested Time-Out (s): 0.00004696 (46.9583 μs)
-  - Enable Asynchronous: Enabled
-  - Enable Event Input Capture: Enabled
-  - Enable Pin Output: Enabled
+  - Timer Mode: SINGLE
+  - Requested Timeout: 46.96 μs
+  - Asynchronous Enable: Enabled
+  - Event Input Capture Enable: Enabled
+  - Pin Output Enable: Enabled
   
   <br><img src="images/decoder-mcc-tcb0.png" width="400"> 
 
 7. TCB1:
-  - Enable Timer: Enabled
+  - Timer Enable: Enabled
   - Clock Selection: DIV1
-  - Timer Mode: Single
-  - Requested Time-Out (s): 0.00000296 (2.9583 μs)
-  - Enable Asynchronous: Enabled
-  - Enable Event Input Capture: Enabled
-  - Enable Pin Output: Enabled
+  - Timer Mode: SINGLE
+  - Requested Timeout: 2.96 μs
+  - Asynchronous Enable: Enabled
+  - Event Input Capture Enable: Enabled
+  - Pin Output Enable: Enabled
   
   <br><img src="images/decoder-mcc-tcb1.png" width="400">
 
 8. TCB2:
-  - Enable Timer: Enabled
+  - Timer Enable: Enabled
   - Clock Selection: DIV1
-  - Timer Mode: Time-Out
-  - Requested Time-Out (s): 0.000374917 (374.9167 μs)
-  - Enable Event Input Capture: Enabled
-  - Enable Noise Cancellation Filter: Enabled
+  - Timer Mode: TIMEOUT
+  - Requested Timeout: 374.917 μs
+  - Event Input Capture Enable: Enabled
+  - Noise Cancellation Filter Enable: Enabled
   - Generate ISR: Enabled
-  - Enable Capture/Time-Out Interrupt: Enabled
+  - Capture/Timeout Interrupt Enable: Enabled
   
   <br><img src="images/decoder-mcc-tcb2.png" width="400">  
 
 9. Interrupt Manager:
   - Global Interrupt Enable: Enabled
+  - TCB2 CAPT: Enabled
   - SPI1 RXC: Enabled
   - SPI1 IE: Enabled
 
@@ -210,7 +211,6 @@ The following peripheral and clock configurations are set up using the MPLAB Cod
  |     PC6 (SPI1 - SCK)                             |   Digital input    |
  |     PC7 (SPI1 - SS)                              |   Digital input    | 
  |     PC0 (USART1 - TX)                            |   Digital output   |
- |     PC1 (USART1 - RX)                            |   Digital input    |
  |     PA3 (TCB1_OUT)                               |   Digital output   |
  |     PA2 (TCB0_OUT)                               |   Digital output   |
  |     PA6 (LUT0_OUT)  - NRZ Data Signal            |   Digital output   |

@@ -11,7 +11,7 @@
 */
 
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -133,6 +133,7 @@ int8_t CCL_Initialize(void)
 }
 
 ISR(CCL_CCL_vect)
+/* cppcheck-suppress misra-c2012-5.5*/
 {
     /*
     * Insert your CCL interrupt handling code

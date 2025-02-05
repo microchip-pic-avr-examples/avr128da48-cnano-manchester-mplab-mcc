@@ -14,18 +14,18 @@
 
 ## Related Documentation
 More details and code examples on the AVR128DA48 can be found at the following links:
-- [AVR128DA48 Product Page](https://www.microchip.com/wwwproducts/en/AVR128DA48)
+- [AVR128DA48 Product Page](https://www.microchip.com/wwwproducts/en/AVR128DA48?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
 - [AVR128DA48 Code Examples on GitHub](https://github.com/microchip-pic-avr-examples?q=avr128da48)
 - [AVR128DA48 Project Examples in START](https://start.atmel.com/#examples/AVR128DA48CuriosityNano)
 
 ## Software Used
-- [MPLAB X IDE v6.20 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide)
-- [MPLAB XC8 v2.46 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers/xc8)
-- [AVR-Dx_DFP v2.4.286 or newer](https://packs.download.microchip.com/)
+- [MPLAB X IDE v6.20 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
+- [MPLAB XC8 v3.00 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
+- [AVR-Dx_DFP v2.6.303 or newer](https://packs.download.microchip.com/)
 
 ## Hardware Used
 
-- Two [AVR128DA48 Curiosity Nano Development board (DM164151)](https://www.microchip.com/Developmenttools/ProductDetails/DM164151) are used as test platforms:
+- Two [AVR128DA48 Curiosity Nano Development board (DM164151)](https://www.microchip.com/en-us/development-tool/dm164151?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08) are used as test platforms:
 <br><img src="images/avr128da48_cnano.png" width="600">
 - 4x Jumper wires
 

@@ -1,3 +1,4 @@
+
 /**
   * TCB1 Generated Driver File
   *
@@ -7,10 +8,12 @@
   *
   * @brief This file contains the API implementation for the TCB1 module driver.
   *
-  * @version TCB1 Driver Version 1.1.5
+  * @version TCB1 Driver Version 2.0.0
+  *
+  * @version Package Version 6.0.0
 */
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -32,59 +35,73 @@
 
 #include "../tcb1.h"
 
-const struct TMR_INTERFACE TCB1_Interface = {
-    .Initialize = TCB1_Initialize,
-    .Start = TCB1_Start,
-    .Stop = TCB1_Stop,
-    .PeriodCountSet = TCB1_Write,
-    .TimeoutCallbackRegister = NULL,
-    .Tasks = TCB1_Tasks
-};
 
-void (*TCB1_OVF_isr_cb)(void) = NULL;
-
-void TCB1_OverflowCallbackRegister(TCB1_cb_t cb)
-{
-	TCB1_OVF_isr_cb = cb;
-}
-
-void (*TCB1_CAPT_isr_cb)(void) = NULL;
-
-void TCB1_CaptureCallbackRegister(TCB1_cb_t cb)
-{
-	TCB1_CAPT_isr_cb = cb;
-}
-
+/**
+ * Section: Global Variables Definitions
+*/
+static void (*TCB1_OVF_isr_cb)(void);
+static void TCB1_DefaultOverflowCallback(void);
+static void (*TCB1_CAPT_isr_cb)(void);
+static void TCB1_DefaultCaptureCallback(void);
 
 void TCB1_Initialize(void)
 {
-    // CCMP 71; 
-    TCB1.CCMP = 0x47;
+    TCB1.CTRLA &= ~TCB_ENABLE_bm; /* Stop Timer */
 
-    // CNT undefined; 
-    TCB1.CNT = 0x0;
+    TCB1.CTRLB = (1 << TCB_ASYNC_bp)   // ASYNC enabled
+        | (1 << TCB_CCMPEN_bp)   // CCMPEN enabled
+        | (0 << TCB_CCMPINIT_bp)   // CCMPINIT disabled
+        | (TCB_CNTMODE_SINGLE_gc);  // CNTMODE SINGLE
 
-    //ASYNC enabled; CCMPEN enabled; CCMPINIT disabled; CNTMODE SINGLE; 
-    TCB1.CTRLB = 0x56;
+    TCB1.DBGCTRL = (0 << TCB_DBGRUN_bp);  // DBGRUN disabled
+
+    TCB1.EVCTRL = (1 << TCB_CAPTEI_bp)   // CAPTEI enabled
+        | (0 << TCB_EDGE_bp)   // EDGE disabled
+        | (0 << TCB_FILTER_bp);  // FILTER disabled
+
+    TCB1.CCMP = 0x47U;  // CCMP 0x47
+
+    TCB1.CNT = 0x0;  // CNT 0xNAN
+
+    TCB1.INTFLAGS = (0 << TCB_CAPT_bp)   // CAPT disabled
+        | (0 << TCB_OVF_bp);  // OVF disabled
     
-    //DBGRUN disabled; 
+	/* cppcheck-suppress misra-c2012-8.7 */
+    TCB1_OverflowCallbackRegister(TCB1_DefaultOverflowCallback);
+	/* cppcheck-suppress misra-c2012-8.7 */
+    TCB1_CaptureCallbackRegister(TCB1_DefaultCaptureCallback);
+
+    TCB1.INTCTRL = (0 << TCB_CAPT_bp)   // CAPT disabled
+        | (0 << TCB_OVF_bp);  // OVF disabled
+
+    TCB1.CTRLA = (0 << TCB_CASCADE_bp)   // CASCADE disabled
+        | (TCB_CLKSEL_DIV1_gc)   // CLKSEL DIV1
+        | (1 << TCB_ENABLE_bp)   // ENABLE enabled
+        | (0 << TCB_RUNSTDBY_bp)   // RUNSTDBY disabled
+        | (0 << TCB_SYNCUPD_bp);  // SYNCUPD disabled
+}
+
+void TCB1_Deinitialize(void)
+{
+    TCB1.CTRLA &= ~TCB_ENABLE_bm; /* Stop Timer */
+    
+    TCB1.CCMP = 0x0;
+
+    TCB1.CNT = 0x0;
+    
+    TCB1.CTRLB = 0x0;
+
     TCB1.DBGCTRL = 0x0;
 
-    //CAPTEI enabled; EDGE disabled; FILTER disabled; 
-    TCB1.EVCTRL = 0x1;
+    TCB1.EVCTRL = 0x0;
 
-    //CAPT disabled; OVF disabled; 
     TCB1.INTCTRL = 0x0;
 
-    //CAPT disabled; OVF disabled; 
-    TCB1.INTFLAGS = 0x0;
-
-    //Temporary Value
     TCB1.TEMP = 0x0;
 
-    //CASCADE disabled; CLKSEL DIV1; ENABLE enabled; RUNSTDBY disabled; SYNCUPD disabled; 
-    TCB1.CTRLA = 0x1;
-
+    TCB1.CTRLA = 0x0;
+    
+    TCB1.INTFLAGS = ~0x0;
 }
 
 void TCB1_Start(void)
@@ -97,12 +114,12 @@ void TCB1_Stop(void)
     TCB1.CTRLA &= ~TCB_ENABLE_bm; /* Stop Timer */
 }
 
-void TCB1_Write(uint16_t timerVal)
+void TCB1_CounterSet(uint16_t timerVal)
 {
     TCB1.CNT = timerVal;
 }
 
-uint16_t TCB1_Read(void)
+uint16_t TCB1_CounterGet(void)
 {
     uint16_t readVal;
 
@@ -110,85 +127,95 @@ uint16_t TCB1_Read(void)
 
     return readVal;
 }
-
-void TCB1_EnableCaptInterrupt(void)
+void TCB1_PeriodSet(uint16_t periodVal)
 {
-    TCB1.INTCTRL |= TCB_CAPT_bm; /* Capture or Timeout: enabled */
+    TCB1.CCMP = (uint16_t) periodVal;
 }
 
-void TCB1_EnableOvfInterrupt(void)
+uint16_t TCB1_PeriodGet(void)
 {
-	TCB1.INTCTRL |= TCB_OVF_bm; /* Overflow Interrupt: enabled */
+    return (uint16_t)TCB1.CCMP;
 }
 
-void TCB1_DisableCaptInterrupt(void)
+uint16_t TCB1_MaxCountGet(void)
 {
-    TCB1.INTCTRL &= ~TCB_CAPT_bm; /* Capture or Timeout: disabled */
+    return TCB1_MAX_COUNT;
 }
 
-void TCB1_DisableOvfInterrupt(void)
+
+
+bool TCB1_CaptureStatusGet(void)
 {
-	TCB1.INTCTRL &= ~TCB_OVF_bm; /* Overflow Interrupt: disabled */
+	return TCB1.INTFLAGS & TCB_CAPT_bm;
 }
 
-inline void TCB1_ClearCaptInterruptFlag(void)
-{
-    TCB1.INTFLAGS |= TCB_CAPT_bm;
-}
-
-inline bool TCB1_IsOvfInterruptFlag(void)
+bool TCB1_OverflowStatusGet(void)
 {
 	return TCB1.INTFLAGS & TCB_OVF_bm;
 }
 
-inline bool TCB1_IsCaptInterruptFlag(void)
+void TCB1_CaptureStatusClear(void)
 {
-	return TCB1.INTFLAGS & TCB_CAPT_bm;
-
+    TCB1.INTFLAGS |= TCB_CAPT_bm;
 }
 
-inline void TCB1_ClearOvfInterruptFlag(void)
+void TCB1_OverflowStatusClear(void)
 {
 	TCB1.INTFLAGS |= TCB_OVF_bm;
 }
 
-inline bool TCB1_IsCaptInterruptEnabled(void)
+bool TCB1_IsCaptInterruptEnabled(void)
 {
     return ((TCB1.INTCTRL & TCB_CAPT_bm) > 0);
 }
 
-inline bool TCB1_IsOvfInterruptEnabled(void)
+bool TCB1_IsOvfInterruptEnabled(void)
 {
     return ((TCB1.INTCTRL & TCB_OVF_bm) > 0);
 }
 
 
+/* cppcheck-suppress misra-c2012-8.7 */
+void TCB1_OverflowCallbackRegister(void (* CallbackHandler)(void))
+{
+	TCB1_OVF_isr_cb = CallbackHandler;
+}
+
+static void TCB1_DefaultOverflowCallback(void)
+{
+    //Add your interrupt code here or
+    //Use TCB1_OverflowCallbackRegister function to use Custom ISR
+}
+
+/* cppcheck-suppress misra-c2012-8.7 */
+void TCB1_CaptureCallbackRegister(void (* CallbackHandler)(void))
+{
+	TCB1_CAPT_isr_cb = CallbackHandler;
+}
+
+static void TCB1_DefaultCaptureCallback(void)
+{
+    //Add your Capture interrupt code here or
+    //Use TCB1_CaptureCallbackRegister function to use Custom ISR
+}
+
+
 void TCB1_Tasks(void)
 {
-	/**
-	 * The interrupt flag is cleared by writing 1 to it, or when the Capture register
-	 * is read in Capture mode
-	 */
-	if(TCB1.INTFLAGS & TCB_CAPT_bm)
+	if(0U != (TCB1.INTFLAGS & TCB_CAPT_bm))
     {
         if (TCB1_CAPT_isr_cb != NULL)
         {
             (*TCB1_CAPT_isr_cb)();
         }
-
         TCB1.INTFLAGS = TCB_CAPT_bm;
     }
-
-    /**
-	 * The Overflow interrupt flag is cleared by writing 1 to it.
-	 */
-	if(TCB1.INTFLAGS & TCB_OVF_bm)
+	if(0U != (TCB1.INTFLAGS & TCB_OVF_bm))
     {
         if (TCB1_OVF_isr_cb != NULL)
         {
             (*TCB1_OVF_isr_cb)();
         }
-
         TCB1.INTFLAGS = TCB_OVF_bm;
     }
 }

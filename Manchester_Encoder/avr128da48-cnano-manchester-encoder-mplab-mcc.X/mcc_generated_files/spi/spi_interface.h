@@ -7,11 +7,11 @@
  *
  * @brief This header file provides API prototypes for the SPI module in Polling and Interrupt mode.
  *
- * @version SPI Interface Version v3.0.0
+ * @version SPI Interface Version v3.1.0
 */
 
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -49,6 +49,7 @@ struct SPI_INTERFACE
     void (*Deinitialize)(void);
     bool (*Open)(uint8_t spiConfigIndex);
     void (*Close)(void);
+    void (*Transfer)(const void *txBuffer, void *rxBuffer, size_t bufferSize);
     void (*BufferExchange)(void *bufferData, size_t bufferSize);
     void (*BufferRead)(void *bufferData, size_t bufferSize);
     void (*BufferWrite)(void *bufferData, size_t bufferSize); 

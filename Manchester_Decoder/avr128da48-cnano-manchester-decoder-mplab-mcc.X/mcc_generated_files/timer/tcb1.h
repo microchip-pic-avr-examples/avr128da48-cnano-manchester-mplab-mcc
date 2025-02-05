@@ -5,12 +5,14 @@
  *
  * @defgroup tcb1 TCB1
  *
- * @brief This file contains the API prototypes and custom data types for the TCB1 driver.
+ * @brief  This file contains the API prototypes and other data types for TCB1.
  *
- * @version TCB1 Driver Version 1.1.5
+ * @version TCB1 Driver Version 2.0.0
+ *
+ * @version Package Version 6.0.0
 */
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -34,115 +36,137 @@
 #define TCB1_H_INCLUDED
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "../system/utils/compiler.h"
-#include "./timer_interface.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-extern const struct TMR_INTERFACE TCB1_Interface;
+#include "tcb1_deprecated.h"
 
 /**
- * @ingroup tcb1
- * @typedef void *TCB1_cb_t
- * @brief Function pointer to callback function called by the TCB. The default value is set to NULL which means that no callback function will be used.
+ * @misradeviation{@advisory,2.5}
+ * MCC Melody drivers provide macros that can be added to an application. 
+ * It depends on the application whether a macro is used or not. 
  */
-typedef void (*TCB1_cb_t)(void);
 
 /**
  * @ingroup tcb1
- * @brief Registers a callback function to be called at capture event.
- * @param TCB1_cb_t cb - Callback function for capture event.
+ * @brief Defines the TCB1 maximum count value
+ */
+#define TCB1_MAX_COUNT (65535U)
+/**
+ * @ingroup tcb1
+ * @brief Defines the TCB1 frequency in hertz.
+ */
+/* cppcheck-suppress misra-c2012-2.5 */
+#define TCB1_CLOCK_FREQ (24000000UL)
+
+/**
+ * @ingroup tcb1
+ * @brief Registers a callback function to be called during a capture event.
+ * @param void (* CallbackHandler)(void) - Pointer to the custom callback
  * @return None.
  */
-void TCB1_CaptureCallbackRegister(TCB1_cb_t cb);
+void TCB1_CaptureCallbackRegister(void (* CallbackHandler)(void));
 
 /**
  * @ingroup tcb1
- * @brief Registers a callback function to be called at overflow event.
- * @param TCB1_cb_t cb - Callback function for overflow event.
+ * @brief Registers a callback function to be called during an overflow event.
+ * @param void (* CallbackHandler)(void) - Pointer to the custom callback
  * @return None.
  */
-void TCB1_OverflowCallbackRegister(TCB1_cb_t cb);
+ void TCB1_OverflowCallbackRegister(void (* CallbackHandler)(void));
 
 /**
  * @ingroup tcb1
- * @brief Initializes the TCB module
+ * @brief Initializes the TCB1 module
  * @param None.
  * @return None.
  */
 void TCB1_Initialize(void);
+
 /**
  * @ingroup tcb1
- * @brief Starts the TCB counter.
+ * @brief Deinitializes the TCB1 module.
+ * @param None.
+ * @return None.
+ */
+void TCB1_Deinitialize(void);
+
+/**
+ * @ingroup tcb1
+ * @brief Starts the TCB1 counter.
  * @param None.
  * @return None.
  */
 void TCB1_Start(void);
+
 /**
  * @ingroup tcb1
- * @brief Stops the TCB counter.
+ * @brief Stops the TCB1 counter.
  * @param None.
  * @return None.
  */
 void TCB1_Stop(void);
+
 /**
  * @ingroup tcb1
- * @brief Enables the capture interrupt for the TCB.
- * @param None.
+ * @brief Writes the counter value to the CNT register.
+ * @pre Initialize TCB1 with TCB1_Initialize() before calling this API.
+ * @param counterValue - Counter value to be written to the CNT register
  * @return None.
  */
-void TCB1_EnableCaptInterrupt(void);
+void TCB1_CounterSet(uint16_t counterValue);
+
 /**
  * @ingroup tcb1
- * @brief Disables the capture interrupt for the TCB.
+ * @brief Reads the counter value from the CNT register.
+ * @pre Initialize TCB1 with TCB1_Initialize() before calling this API.
  * @param None.
+ * @return Counter value from the CNT register
+ */
+uint16_t TCB1_CounterGet(void);
+
+/**
+ * @ingroup tcb1
+ * @brief Loads the period count value to the CCMP register.
+ * @pre Initialize TCB1 with TCB1_Initialize() before calling this API.
+ * @param periodVal - Count value written to the CCMP register
  * @return None.
  */
-void TCB1_DisableCaptInterrupt(void);
+void TCB1_PeriodSet(uint16_t periodVal);
+
 /**
  * @ingroup tcb1
- * @brief Enables the overflow interrupt for the TCB.
+ * @brief Gets the current period value from the CCMP register.
+ * @pre Initialize TCB1 with TCB1_Initialize() before calling this API.
  * @param None.
- * @return None.
+ * @return Period value from the CCMP register
  */
-void TCB1_EnableOvfInterrupt(void);
+uint16_t TCB1_PeriodGet(void);
+
 /**
  * @ingroup tcb1
- * @brief Disables the overflow interrupt for the TCB.
+ * @brief Gets the maximum timer count value.
  * @param None.
- * @return None.
+ * @return Maximum count value
  */
-void TCB1_DisableOvfInterrupt(void);
-/**
- * @ingroup tcb1
- * @brief Reads the 16-bit timer value of the TCB.
- * @param None.
- * @return uint16_t
- */
-uint16_t TCB1_Read(void);
-/**
- * @ingroup tcb1
- * @brief Writes the 16-bit timer value to the TCB. 
- * @param uint16_t timerVal - 16-bit Timer value to write for TCB interface.
- * @return None.
- */
-void TCB1_Write(uint16_t timerVal);
-/**
- * @ingroup tcb1
- * @brief Checks the Overflow Interrupt flag.
- * @param None.
- * @return bool.
- */
-bool TCB1_IsOvfInterruptFlag(void);
+uint16_t TCB1_MaxCountGet(void);
+
+
+
 /**
  * @ingroup tcb1
  * @brief Checks the Capture Interrupt flag.
  * @param None.
- * @return bool.
+ * @return bool
  */
-bool TCB1_IsCaptInterruptFlag(void);
+bool TCB1_CaptureStatusGet(void);
+
+/**
+ * @ingroup tcb1
+ * @brief Checks the Overflow Interrupt flag.
+ * @param None.
+ * @return bool
+ */
+bool TCB1_OverflowStatusGet(void);
 
 /**
  * @ingroup tcb1
@@ -150,28 +174,32 @@ bool TCB1_IsCaptInterruptFlag(void);
  * @param None.
  * @return None.
  */
-void TCB1_ClearCaptInterruptFlag(void);
-/**
- * @ingroup tcb1
- * @brief Checks if the capture interrupt is enabled.
- * @param None.
- * @return None.
- */
-bool TCB1_IsCaptInterruptEnabled(void);
+void TCB1_CaptureStatusClear(void);
+
 /**
  * @ingroup tcb1
  * @brief Clears the Overflow Interrupt flag.
  * @param None.
  * @return None.
  */
-void TCB1_ClearOvfInterruptFlag(void);
+void TCB1_OverflowStatusClear(void);
+
+/**
+ * @ingroup tcb1
+ * @brief Checks if the capture interrupt is enabled.
+ * @param None.
+ * @return None.
+ */
+bool TCB1_IsCaptInterruptEnabled(void) __attribute__((deprecated("This function will be deprecated in future")));
+
 /**
  * @ingroup tcb1
  * @brief Checks if the overflow interrupt is enabled.
  * @param None.
  * @return None.
  */
-bool TCB1_IsOvfInterruptEnabled(void);
+bool TCB1_IsOvfInterruptEnabled(void) __attribute__((deprecated("This function will be deprecated in future")));
+
 
 /**
  * @ingroup tcb1_normal
@@ -181,10 +209,5 @@ bool TCB1_IsOvfInterruptEnabled(void);
  */
 void TCB1_Tasks(void);
 
-
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* TCB1_H_INCLUDED */

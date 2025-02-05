@@ -5,13 +5,13 @@
  * 
  * @ingroup usart1
  * 
- * @brief This is the generated driver implementation file for the USART1 driver using 
+ * @brief This is the generated driver implementation file for the USART1 driver using the  Universal Synchronous and Asynchronous serial Receiver and Transmitter (USART) module. 
  *
- * @version USART1 Driver Version 2.1.0
+ * @version USART1 Driver Version 2.1.1
 */
 
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -77,14 +77,15 @@ const uart_drv_interface_t UART1 = {
 /**
   Section: USART1 variables
 */
+ /* cppcheck-suppress misra-c2012-19.2 */
 static volatile usart1_status_t usart1RxLastError;
 
 /**
   Section: USART1 APIs
 */
-void (*USART1_FramingErrorHandler)(void);
-void (*USART1_OverrunErrorHandler)(void);
-void (*USART1_ParityErrorHandler)(void);
+static void (*USART1_FramingErrorHandler)(void);
+static void (*USART1_OverrunErrorHandler)(void);
+static void (*USART1_ParityErrorHandler)(void);
 
 static void USART1_DefaultFramingErrorCallback(void);
 static void USART1_DefaultOverrunErrorCallback(void);
@@ -101,7 +102,7 @@ void USART1_Initialize(void)
     // Set the USART1 module to the options selected in the user interface.
 
     //BAUD 2500; 
-    USART1.BAUD = (uint16_t)USART1_BAUD_RATE(38400);
+    USART1.BAUD = (uint16_t)USART1_BAUD_RATE(38400UL);
 	
     // ABEIE disabled; DREIE disabled; LBME disabled; RS485 DISABLE; RXCIE disabled; RXSIE disabled; TXCIE disabled; 
     USART1.CTRLA = 0x0;
@@ -228,7 +229,7 @@ size_t USART1_ErrorGet(void)
 {
     usart1RxLastError.status = 0;
     
-    if(USART1.RXDATAH & USART_FERR_bm)
+    if(USART_FERR_bm == (USART1.RXDATAH & USART_FERR_bm))
     {
         usart1RxLastError.ferr = 1;
         if(NULL != USART1_FramingErrorHandler)
@@ -236,7 +237,7 @@ size_t USART1_ErrorGet(void)
             USART1_FramingErrorHandler();
         }  
     }
-    if(USART1.RXDATAH & USART_PERR_bm)
+    if(USART_PERR_bm == (USART1.RXDATAH & USART_PERR_bm))
     {
         usart1RxLastError.perr = 1;
         if(NULL != USART1_ParityErrorHandler)
@@ -244,7 +245,7 @@ size_t USART1_ErrorGet(void)
             USART1_ParityErrorHandler();
         }  
     }
-    if(USART1.RXDATAH & USART_BUFOVF_bm)
+    if(USART_BUFOVF_bm == (USART1.RXDATAH & USART_BUFOVF_bm))
     {
         usart1RxLastError.oerr = 1;
         if(NULL != USART1_OverrunErrorHandler)

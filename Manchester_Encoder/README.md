@@ -21,17 +21,17 @@ An example is presented in the figure below:
 ## Related Documentation
 
 More details and code examples on the AVR128DA48 can be found at the following links:
-- [AVR128DA48 Product Page](https://www.microchip.com/wwwproducts/en/AVR128DA48)
+- [AVR128DA48 Product Page](https://www.microchip.com/wwwproducts/en/AVR128DA48?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
 - [AVR128DA48 Code Examples on Discover](https://mplab-discover.microchip.com/v2?dsl=avr128da48)
 - [AVR128DA48 Code Examples on GitHub](https://github.com/microchip-pic-avr-examples?q=avr128da48)
 
 ## Software Used
-- [MPLAB X IDE v6.20 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide)
-- [MPLAB XC8 v2.46 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers/xc8)
-- [AVR®-Dx_DFP v2.4.286 or newer](https://packs.download.microchip.com/)
+- [MPLAB X IDE v6.20 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
+- [MPLAB XC8 v3.00 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
+- [AVR®-Dx_DFP v2.6.303 or newer](https://packs.download.microchip.com/)
 
 ## Hardware Used
-- The [AVR128DA48 Curiosity Nano Development board (DM164151)](https://www.microchip.com/Developmenttools/ProductDetails/DM164151) is used as a test platform:
+- The [AVR128DA48 Curiosity Nano Development board (DM164151)](https://www.microchip.com/en-us/development-tool/dm164151?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08) is used as a test platform:
 <br><img src="images/avr128da48_cnano.png" width="600">
 
 ## Operation
@@ -83,7 +83,7 @@ The following peripheral and clock configurations are set up using the MPLAB Cod
 
 4. EVSYS:
   - Event Generators:
-    - USART0_XCK: CHANNEL1
+    - SPI0_SCK: CHANNEL1
   - Event Users:
     - CHANNEL1: CCLLUT2A
 
@@ -105,8 +105,8 @@ The following peripheral and clock configurations are set up using the MPLAB Cod
 
 6. Interrupt Manager:
   - Global Interrupt Enable: Enabled
-  - SPI1 RXC: Enabled
-  - SPI1 IE: Enabled
+  - USART1 RXC: Enabled
+  - USART1 RXS: Enabled
 
  |                         Pin                          |    Configuration   |
  | :--------------------------------------------------: | :----------------: |

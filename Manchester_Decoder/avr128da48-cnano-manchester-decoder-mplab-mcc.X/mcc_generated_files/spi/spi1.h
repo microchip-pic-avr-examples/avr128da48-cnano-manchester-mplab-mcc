@@ -7,10 +7,12 @@
  *
  * @brief This header file provides API prototypes for the SPI1 driver.
  *
- * @version SPI1 Driver Version 3.0.0
+ * @version SPI1 Driver Version 3.1.0
+ *  
+ * @version SPI1 Package Version 5.1.0
 */
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -69,6 +71,11 @@ extern const struct SPI_INTERFACE SPI1_Client;
  * @brief    This macro defines the Custom Name for \ref SPI1_ByteExchange API
  */
 #define SPI1_Client_ByteExchange SPI1_ByteExchange
+/**
+ * @ingroup  spi1
+ * @brief    This macro defines the Custom Name for \ref SPI1_Transfer API
+ */
+#define SPI1_Client_Transfer SPI1_Transfer
 /**
  * @ingroup  spi1
  * @brief    This macro defines the Custom Name for \ref SPI1_BufferExchange API
@@ -164,6 +171,16 @@ void SPI1_Close(void);
  * @return Received data byte
  */
 uint8_t SPI1_ByteExchange(uint8_t byteData);
+
+/**
+ * @ingroup spi1
+ * @brief Exchanges the buffer using the SPI protocol with separate transmit and receive buffer locations. This function is blocking in Polling mode.
+ * @param [in] *txBuffer Buffer address of the data to be transmitted during exchange
+ * @param [in] *rxBuffer Buffer address of the data to be received during exchange
+ * @param [in] bufferSize Size of the data in bytes
+ * @return None.
+ */
+void SPI1_Transfer(const void * txBuffer, void * rxBuffer, size_t bufferSize);
 
 /**
  * @ingroup spi1

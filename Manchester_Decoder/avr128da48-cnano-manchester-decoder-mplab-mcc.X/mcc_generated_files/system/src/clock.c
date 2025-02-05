@@ -1,3 +1,5 @@
+
+
 /**
  * CLKCTRL Generated Driver File
  * 
@@ -7,10 +9,12 @@
  * 
  * @brief This file contains the API implementation for the CLKCTRL driver.
  *
- * @version CLKCTRL Driver Version 1.0.1
+ * @version CLKCTRL Driver Version 1.0.2
+ *
+ * @version Package Version 5.3.6
 */
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -35,33 +39,39 @@
 
 void CLOCK_Initialize(void)
 {    
-    //CLKOUT disabled; CLKSEL Internal high-frequency oscillator; 
-    ccp_write_io((void*)&(CLKCTRL.MCLKCTRLA),0x0);
-
-    //PDIV 2X; PEN disabled; 
-    ccp_write_io((void*)&(CLKCTRL.MCLKCTRLB),0x0);
-
-    //LOCKEN disabled; 
-    ccp_write_io((void*)&(CLKCTRL.MCLKLOCK),0x0);
-
-    //EXTS disabled; OSCHFS disabled; OSC32KS disabled; PLLS disabled; SOSC disabled; XOSC32KS disabled; 
-    ccp_write_io((void*)&(CLKCTRL.MCLKSTATUS),0x0);
-
-    //AUTOTUNE disabled; FRQSEL 24 MHz system clock; RUNSTDBY disabled; 
-    ccp_write_io((void*)&(CLKCTRL.OSCHFCTRLA),0x24);
-
-    //TUNE 0x0; 
-    ccp_write_io((void*)&(CLKCTRL.OSCHFTUNE),0x0);
-
-    //RUNSTDBY disabled; 
-    ccp_write_io((void*)&(CLKCTRL.OSC32KCTRLA),0x0);
-
-    //MULFAC PLL is disabled; RUNSTDBY disabled; SOURCE disabled; 
-    ccp_write_io((void*)&(CLKCTRL.PLLCTRLA),0x0);
-
-    //CSUT 1k cycles; ENABLE disabled; LPMODE disabled; RUNSTDBY disabled; SEL disabled; 
-    ccp_write_io((void*)&(CLKCTRL.XOSC32KCTRLA),0x0);
-
+    ccp_write_io((void*)&(CLKCTRL.MCLKCTRLA),(0 << CLKCTRL_CLKOUT_bp)   // CLKOUT disabled
+            | CLKCTRL_CLKSEL_OSCHF_gc   // CLKSEL Internal high-frequency oscillator
+            );
+    ccp_write_io((void*)&(CLKCTRL.MCLKCTRLB),CLKCTRL_PDIV_2X_gc   // PDIV 2X
+            | (0 << CLKCTRL_PEN_bp)   // PEN disabled
+            );
+    ccp_write_io((void*)&(CLKCTRL.MCLKLOCK),(0 << CLKCTRL_LOCKEN_bp)   // LOCKEN disabled
+            );
+    ccp_write_io((void*)&(CLKCTRL.MCLKSTATUS),(0 << CLKCTRL_EXTS_bp)   // EXTS disabled
+            | (0 << CLKCTRL_OSCHFS_bp)   // OSCHFS disabled
+            | (0 << CLKCTRL_OSC32KS_bp)   // OSC32KS disabled
+            | (0 << CLKCTRL_PLLS_bp)   // PLLS disabled
+            | (0 << CLKCTRL_SOSC_bp)   // SOSC disabled
+            | (0 << CLKCTRL_XOSC32KS_bp)   // XOSC32KS disabled
+            );
+    ccp_write_io((void*)&(CLKCTRL.OSCHFCTRLA),(0 << CLKCTRL_AUTOTUNE_bp)   // AUTOTUNE disabled
+            | CLKCTRL_FRQSEL_24M_gc   // FRQSEL 24 MHz system clock
+            | (0 << CLKCTRL_RUNSTDBY_bp)   // RUNSTDBY disabled
+            );
+    ccp_write_io((void*)&(CLKCTRL.OSCHFTUNE),0x0   // TUNE 0x0
+            );
+    ccp_write_io((void*)&(CLKCTRL.OSC32KCTRLA),(0 << CLKCTRL_RUNSTDBY_bp)   // RUNSTDBY disabled
+            );
+    ccp_write_io((void*)&(CLKCTRL.PLLCTRLA),CLKCTRL_MULFAC_DISABLE_gc   // MULFAC PLL is disabled
+            | (0 << CLKCTRL_RUNSTDBY_bp)   // RUNSTDBY disabled
+            | (0 << CLKCTRL_SOURCE_bp)   // SOURCE disabled
+            );
+    ccp_write_io((void*)&(CLKCTRL.XOSC32KCTRLA),CLKCTRL_CSUT_1K_gc   // CSUT 1k cycles
+            | (0 << CLKCTRL_ENABLE_bp)   // ENABLE disabled
+            | (0 << CLKCTRL_LPMODE_bp)   // LPMODE disabled
+            | (0 << CLKCTRL_RUNSTDBY_bp)   // RUNSTDBY disabled
+            | (0 << CLKCTRL_SEL_bp)   // SEL disabled
+            );
 }
 
 /**

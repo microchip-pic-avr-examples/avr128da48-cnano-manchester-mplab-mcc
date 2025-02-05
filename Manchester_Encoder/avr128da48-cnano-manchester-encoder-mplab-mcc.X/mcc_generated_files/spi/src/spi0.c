@@ -1,16 +1,18 @@
 /**
-  * SPI0 Generated Driver File
-  *
-  * @file spi0.c
-  *
-  * @ingroup spi0
-  *
-  * @brief This file contains the driver code for the SPI0 module.
-  *
-  * @version SPI0 Driver Version 3.0.0
+ * SPI0 Generated Driver File
+ *
+ * @file spi0.c
+ *
+ * @ingroup spi0
+ *
+ * @brief This file contains the driver code for the SPI0 module.
+ *
+ * @version SPI0 Driver Version 3.1.0
+ *  
+ * @version SPI0 Package Version 5.1.0
 */
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -30,6 +32,7 @@
     THIS SOFTWARE.
 */
 
+
 #include "../spi0.h"
 #include "../spi_polling_types.h"
 
@@ -39,6 +42,7 @@ const struct SPI_INTERFACE SPI0_Host =
     .Deinitialize = SPI0_Deinitialize,
     .Open = SPI0_Open,
     .Close = SPI0_Close,
+    .Transfer = SPI0_Transfer,
     .BufferExchange = SPI0_BufferExchange,
     .BufferWrite = SPI0_BufferWrite,
     .BufferRead = SPI0_BufferRead,	
@@ -54,23 +58,28 @@ const struct SPI_INTERFACE SPI0_Host =
 static const spi_configuration_t spi0_configuration[] =
 {
     { 0x27, 0xc5 },
-    { 0x31, 0xC4 }
+    { 0x30, 0xC4 }
 };
 
 void SPI0_Initialize(void)
 {
-    SPI0.CTRLA = 0x00;
-    SPI0.CTRLB = 0x00;
-    SPI0.INTFLAGS = 0x00;
-    SPI0.INTCTRL = 0x00;
+    SPI0.CTRLA &= ~SPI_ENABLE_bm;
+    SPI0.CTRLA = (1 << SPI_CLK2X_bp)                /* CLK2X (enabled) */
+				|(0 << SPI_DORD_bp)                 /* DORD (disabled) */
+				|(0 << SPI_ENABLE_bp)               /* ENABLE (disabled) */
+				|(1 << SPI_MASTER_bp)               /* MASTER (enabled) */
+				|(SPI_PRESC_DIV4_gc);               /* PRESC (DIV4) */
+    SPI0.CTRLB = (1 << SPI_BUFEN_bp)                /* BUFEN (enabled) */
+				|(1 << SPI_BUFWR_bp)                /* BUFWR (enabled) */
+				|(SPI_MODE_0_gc)                    /* MODE (0) */
+				|(1 << SPI_SSD_bp);                 /* SSD (enabled) */
 }
 
 void SPI0_Deinitialize(void)
 {
-    SPI0.CTRLA = 0x00;
-    SPI0.CTRLB = 0x00;
-    SPI0.INTFLAGS = 0x00;
-    SPI0.INTCTRL = 0x00;
+    SPI0.CTRLA = 0x0;
+    SPI0.CTRLB = 0x0;
+    SPI0.INTCTRL = 0x0;
 }
 
 bool SPI0_Open(uint8_t spiConfigIndex)
@@ -78,12 +87,9 @@ bool SPI0_Open(uint8_t spiConfigIndex)
     bool returnValue = false;
     if (0 == (SPI0.CTRLA & SPI_ENABLE_bm)) 
     {
-        //BUFEN enabled; BUFWR enabled; MODE 0; SSD enabled; 
         SPI0.CTRLB = spi0_configuration[spiConfigIndex].ctrlb;
-        //DREIE disabled; IE disabled; RXCIE disabled; SSIE disabled; TXCIE disabled; 
-        SPI0.INTCTRL = 0x0;
-        //CLK2X enabled; DORD disabled; ENABLE enabled; MASTER enabled; PRESC DIV4; 
         SPI0.CTRLA = spi0_configuration[spiConfigIndex].ctrla;
+        SPI0.CTRLA |= SPI_ENABLE_bm;
         returnValue = true;
     } 
     else 
@@ -95,10 +101,7 @@ bool SPI0_Open(uint8_t spiConfigIndex)
 
 void SPI0_Close(void)
 {
-    SPI0.CTRLA = 0x00;
-    SPI0.CTRLB = 0x00;
-    SPI0.INTFLAGS = 0x00;
-    SPI0.INTCTRL = 0x00;
+    SPI0.CTRLA &= ~SPI_ENABLE_bm;
 }
 
 uint8_t SPI0_ByteExchange(uint8_t byteData)
@@ -121,6 +124,25 @@ void SPI0_ByteWrite(uint8_t byteData)
 uint8_t SPI0_ByteRead(void)
 {
     return SPI0.DATA;
+}
+
+void SPI0_Transfer(const void *txBuffer, void *rxBuffer, size_t bufferSize)
+{
+    const uint8_t *bufferTransmit = (const uint8_t *)txBuffer;
+    uint8_t *bufferReceive = (uint8_t *)rxBuffer;
+	size_t bufferInputSize = bufferSize;
+    while(0U != bufferInputSize) 
+    {
+        SPI0.DATA = *bufferTransmit;
+        while (0 == (SPI0.INTFLAGS & SPI_RXCIF_bm))
+        {
+            ; // Wait until ongoing SPI transfer is completed
+        }
+        *bufferReceive = SPI0.DATA;
+        bufferTransmit++;
+        bufferReceive++;  
+        bufferInputSize--;
+    }
 }
 
 void SPI0_BufferExchange(void *bufferData, size_t bufferSize)

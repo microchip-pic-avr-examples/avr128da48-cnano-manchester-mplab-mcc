@@ -9,10 +9,10 @@
  *
  * @version Driver Version 1.0.2
  *
- * @version Package Version 4.2.13
+ * @version Package Version 4.2.14
 */
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -42,13 +42,13 @@ extern "C" {
 
 #include "../system/utils/compiler.h"
 #include "config_bits.h"
-#include "../system/clock.h"
 #include "../system/pins.h"
 #include "../ccl/ccl.h"
 #include "../evsys/evsys.h"
-#include "../spi/spi0.h"
 #include "../uart/usart1.h"
 #include "../system/interrupt.h"
+#include "../system/clock.h"
+#include "../spi/spi0.h"
 /**
  * @ingroup systemdriver
  * @brief Initializes the System module. This routine is called only once during system initialization, before calling any other API.

@@ -41,10 +41,12 @@
           <itemPath>mcc_generated_files/system/system.h</itemPath>
         </logicalFolder>
         <logicalFolder name="timer" displayName="timer" projectFiles="true">
-          <itemPath>mcc_generated_files/timer/timer_interface.h</itemPath>
           <itemPath>mcc_generated_files/timer/tcb0.h</itemPath>
           <itemPath>mcc_generated_files/timer/tcb2.h</itemPath>
           <itemPath>mcc_generated_files/timer/tcb1.h</itemPath>
+          <itemPath>mcc_generated_files/timer/tcb2_deprecated.h</itemPath>
+          <itemPath>mcc_generated_files/timer/tcb1_deprecated.h</itemPath>
+          <itemPath>mcc_generated_files/timer/tcb0_deprecated.h</itemPath>
         </logicalFolder>
         <logicalFolder name="uart" displayName="uart" projectFiles="true">
           <itemPath>mcc_generated_files/uart/usart1.h</itemPath>
@@ -120,11 +122,11 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>nEdbgTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>2.46</languageToolchainVersion>
+        <languageToolchainVersion>3.00</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="AVR-Dx_DFP" vendor="Microchip" version="2.4.286"/>
+        <pack name="AVR-Dx_DFP" vendor="Microchip" version="2.6.303"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -363,11 +365,11 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>nEdbgTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>2.46</languageToolchainVersion>
+        <languageToolchainVersion>3.00</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="AVR-Dx_DFP" vendor="Microchip" version="2.4.286"/>
+        <pack name="AVR-Dx_DFP" vendor="Microchip" version="2.6.303"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>

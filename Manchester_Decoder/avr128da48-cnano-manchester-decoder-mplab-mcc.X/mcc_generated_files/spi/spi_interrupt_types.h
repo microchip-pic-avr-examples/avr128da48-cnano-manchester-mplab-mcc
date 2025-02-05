@@ -7,11 +7,11 @@
  *
  * @brief This header file provides type definitions for the SPI module operation in Interrupt mode.
  *
- * @version SPI Driver Version 3.0.0
+ * @version SPI Driver Version 3.1.0
 */
 
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -67,7 +67,8 @@ typedef enum
  */
 typedef volatile struct
 { 
-    uint8_t* buffer;                    // Pointer to SPI buffer
+    const uint8_t *transmitBuffer; 	    // Pointer to transmit buffer
+    uint8_t *receiveBuffer;  	        // Pointer to receive buffer
     size_t bufferLength;                // Stores number of bytes that needs to be processed
     spi_transfer_type_t transferType;   // Type of SPI API being run at the moment
     spi_status_t status;                // Indicates if SPI driver is still completing a requested transaction

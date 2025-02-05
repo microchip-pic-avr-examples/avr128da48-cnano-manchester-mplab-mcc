@@ -7,10 +7,12 @@
  *
  * @brief This header file provides API prototypes for the SPI0 driver.
  *
- * @version SPI0 Driver Version 3.0.0
+ * @version SPI0 Driver Version 3.1.0
+ *  
+ * @version SPI0 Package Version 5.1.0
 */
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -69,6 +71,11 @@ extern const struct SPI_INTERFACE SPI0_Host;
  * @brief    This macro defines the Custom Name for \ref SPI0_ByteExchange API
  */
 #define SPI0_Host_ByteExchange SPI0_ByteExchange
+/**
+ * @ingroup  spi0
+ * @brief    This macro defines the Custom Name for \ref SPI0_Transfer API
+ */
+#define SPI0_Host_Transfer SPI0_Transfer
 /**
  * @ingroup  spi0
  * @brief    This macro defines the Custom Name for \ref SPI0_BufferExchange API
@@ -159,6 +166,16 @@ void SPI0_Close(void);
  * @return Received data byte
  */
 uint8_t SPI0_ByteExchange(uint8_t byteData);
+
+/**
+ * @ingroup spi0
+ * @brief Exchanges the buffer using the SPI protocol with separate transmit and receive buffer locations. This function is blocking in Polling mode.
+ * @param [in] *txBuffer Buffer address of the data to be transmitted during exchange
+ * @param [in] *rxBuffer Buffer address of the data to be received during exchange
+ * @param [in] bufferSize Size of the data in bytes
+ * @return None.
+ */
+void SPI0_Transfer(const void * txBuffer, void * rxBuffer, size_t bufferSize);
 
 /**
  * @ingroup spi0
