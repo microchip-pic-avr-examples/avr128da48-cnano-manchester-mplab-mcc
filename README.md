@@ -19,9 +19,9 @@ More details and code examples on the AVR128DA48 can be found at the following l
 - [AVR128DA48 Project Examples in START](https://start.atmel.com/#examples/AVR128DA48CuriosityNano)
 
 ## Software Used
-- [MPLAB X IDE v6.20 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
+- [MPLAB® X IDE v6.20 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
 - [MPLAB XC8 v3.00 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
-- [AVR-Dx_DFP v2.6.303 or newer](https://packs.download.microchip.com/)
+- [AVR®-Dx_DFP v2.6.303 or newer](https://packs.download.microchip.com/)
 
 ## Hardware Used
 

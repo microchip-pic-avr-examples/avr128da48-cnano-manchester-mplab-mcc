@@ -10,7 +10,7 @@ The Manchester code combines data and clock into a single signal, where one cloc
 In this application, the Manchester communication parameters are: 
 - Baud rate: 16000 bits/s
 - 8-bit transfer
-- MSb (Most Significant bit) is sent first
+- Most Significant bit (MSb) is sent first
 - IEEE 802.3
 - Manchester version (negative edge is binary zero)
 
@@ -26,7 +26,7 @@ More details and code examples on the AVR128DA48 can be found at the following l
 - [AVR128DA48 Code Examples on GitHub](https://github.com/microchip-pic-avr-examples?q=avr128da48)
 
 ## Software Used
-- [MPLAB X IDE v6.20 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
+- [MPLAB® X IDE v6.20 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
 - [MPLAB XC8 v3.00 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DA&utm_content=avr128da48-cnano-manchester-mplab-mcc-github&utm_bu=MCU08)
 - [AVR®-Dx_DFP v2.6.303 or newer](https://packs.download.microchip.com/)
 
@@ -41,7 +41,7 @@ To program the Curiosity Nano board with this MPLAB X project, follow the steps 
 
 ## Concept
 
-This project is an implementation of a Manchester Decoder using Core Independent Peripherals (CIPs) by following the interaction between the Timer/Counter type B (TCB), Event System (EVSYS), Configurable Custom Logic (CCL) and Serial Peripheral Interface (SPI) peripherals. The encoded data are received through a single data wire. The Non-Return-to-Zero (NRZ) signal and clock signal are recovered using the circuit composed of the CIP mentioned above. The resulting signals are routed to the SPI peripheral which reads the data. The decoded data are transmitted further via serial communication.
+This project is an implementation of a Manchester Decoder using Core Independent Peripherals (CIPs) by following the interaction between the Timer/Counter type B (TCB), Event System (EVSYS), Configurable Custom Logic (CCL) and Serial Peripheral Interface (SPI) peripherals. The encoded data are received through a single data wire. The Non-Return-to-Zero (NRZ) signal and clock signal are recovered using the circuit composed of the CIP. The resulting signals are routed to the SPI peripheral which reads the data. The decoded data are transmitted further via serial communication.
 
 The block diagram of this application is presented in the figure below: 
 
